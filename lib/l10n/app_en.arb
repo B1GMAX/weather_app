@@ -1,4 +1,5 @@
 {
     "hourly": "Hourly",
-    "daily": "Daily"
+    "daily": "Daily",
+    "speedofwind": "Speed of wind"
 }

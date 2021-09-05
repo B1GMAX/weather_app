@@ -7,6 +7,7 @@ import 'package:weather_app/information.dart';
 import 'package:weather_app/location.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+
 class Bloc {
   StreamController<List<Information>> _controller =
       StreamController<List<Information>>();
@@ -56,6 +57,7 @@ class Bloc {
       List<dynamic> w = element['weather'];
       String weather = w.first['main'];
       String description = w.first['description'];
+      String iconWeather = w.first['icon'];
       Map<String, dynamic> wind = element['wind'];
       double speedOfWind = wind['speed'].toDouble();
       String dtTxt = element['dt_txt'];
@@ -65,7 +67,8 @@ class Bloc {
           speedOfWind: speedOfWind,
           dtTxt: dtTxt,
           city: city,
-          weather: weather));
+          weather: weather,
+          iconWeather: iconWeather));
       if (dtTxt.contains('12:00:00')) {
         _informationDaily.add(Information(
             temp: temp,
@@ -73,7 +76,8 @@ class Bloc {
             speedOfWind: speedOfWind,
             dtTxt: dtTxt.replaceAll(('12:00:00'), ''),
             city: city,
-            weather: weather));
+            weather: weather,
+            iconWeather: iconWeather));
       }
     }
     _controller.add(_information);

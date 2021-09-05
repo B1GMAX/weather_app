@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:weather_app/bloc.dart';
 import 'package:weather_app/second_screen.dart';
+import 'package:weather_icons/weather_icons.dart';
 
 import 'information.dart';
 
@@ -77,6 +78,9 @@ class HomeScreen extends StatelessWidget {
                                                     .data![index].description,
                                                 city:
                                                     snapshot.data![index].city,
+                                            iconWeatherData: _getIconData(
+                                                    snapshot.data![index]
+                                                        .iconWeather),
                                               )));
                                 },
                                 child: Container(
@@ -87,10 +91,16 @@ class HomeScreen extends StatelessWidget {
                                   child: ListTile(
                                     title:
                                         Text('${snapshot.data![index].dtTxt}'),
-                                    subtitle: Text(
-                                      '${snapshot.data![index].temp.toInt()} C',
-                                      style: const TextStyle(
-                                          fontWeight: FontWeight.w800),
+                                    subtitle: Row(
+                                      children: [
+                                        Text(
+                                          '${snapshot.data![index].temp.toInt()} C',
+                                          style: const TextStyle(
+                                              fontWeight: FontWeight.w800),
+                                        ),
+                                        Icon(_getIconData(
+                                            snapshot.data![index].iconWeather))
+                                      ],
                                     ),
                                   ),
                                 ),
@@ -108,5 +118,25 @@ class HomeScreen extends StatelessWidget {
         );
       },
     );
+  }
+
+  IconData _getIconData(String iconWeather) {
+    if (iconWeather.startsWith('01')) {
+      return WeatherIcons.day_sunny;
+    }
+    if (iconWeather.startsWith('02')) {
+      return WeatherIcons.day_cloudy_windy;
+    }
+    if (iconWeather.startsWith('03')) {
+      return WeatherIcons.day_cloudy;
+    }
+    if (iconWeather.startsWith('04')) {
+      return WeatherIcons.cloudy;
+    }
+    if (iconWeather.startsWith('10')) {
+      return WeatherIcons.showers;
+    }
+
+    return WeatherIcons.day_cloudy_gusts;
   }
 }

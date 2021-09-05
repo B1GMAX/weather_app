@@ -5,6 +5,7 @@ class Information {
   final double speedOfWind;
   final String dtTxt;
   final String weather;
+  final String iconWeather;
 
   Information({
     required this.weather,
@@ -13,5 +14,6 @@ class Information {
     required this.speedOfWind,
     required this.dtTxt,
     required this.city,
+    required this.iconWeather,
   });
 }
